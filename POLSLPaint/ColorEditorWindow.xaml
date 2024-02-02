@@ -1,0 +1,63 @@
+﻿<Window x:Class="POLSLPaint.ColorEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POLSLPaint"
+        mc:Ignorable="d"
+        Title="ColorEditorWindow" Height="125" Width="650">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.4*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Canvas Name="paintSurfaceBackground" Grid.Column="1" Grid.Row="1">
+            <Canvas.Background>
+                <ImageBrush AlignmentY="Top" AlignmentX="Left" Stretch="None" ViewportUnits="Absolute" Viewport="0,0,98,98" TileMode="Tile" ImageSource="/istockphoto-1210545210-612x612.jpg" >
+                </ImageBrush>
+            </Canvas.Background>
+        </Canvas>
+
+        <TextBlock x:Name="colorPreview" Grid.Column="1"></TextBlock>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold">R</Label>
+            <TextBox Grid.Row="0" Grid.Column="0" x:Name="Rinput" Width="50" Height="30"></TextBox>
+            <Label Grid.Row="0" Grid.Column="1" FontWeight="Bold">G</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="Ginput" Width="50" Height="30"></TextBox>
+            <Label Grid.Row="0" Grid.Column="2" FontWeight="Bold">B</Label>
+            <TextBox Grid.Row="0" Grid.Column="2" x:Name="Binput" Width="50" Height="30"></TextBox>
+
+
+            <Label Grid.Row="1" Grid.Column="0" FontWeight="Bold">H (°)</Label>
+            <TextBox Grid.Row="1" Grid.Column="0" x:Name="Hinput" Width="50" Height="30"></TextBox>
+            <Label Grid.Row="1" Grid.Column="1" FontWeight="Bold">S (%)</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="Sinput" Width="50" Height="30"></TextBox>
+            <Label Grid.Row="1" Grid.Column="2" FontWeight="Bold">V (%)</Label>
+            <TextBox Grid.Row="1" Grid.Column="2" x:Name="Vinput" Width="50" Height="30"></TextBox>
+
+            <Slider Grid.Row="2" Grid.Column="0" x:Name="alphaslider"  Minimum="0" Maximum="255" TickFrequency="10" TickPlacement="BottomRight"></Slider>
+            
+            <Button Grid.Row="2" Grid.Column="1" Content="Zatwierdź" FontWeight="Bold" FontSize="15" Click="Button_Click"></Button>
+
+        </Grid>
+        
+    </Grid>
+</Window>

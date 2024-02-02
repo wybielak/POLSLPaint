@@ -1,0 +1,126 @@
+﻿<Window x:Class="POLSLPaint.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="POLSLPaint" Height="900" Width="1440">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3.5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Canvas Name="paintSurfaceBackground" Grid.Column="1" Grid.Row="1">
+            <Canvas.Background>
+                <ImageBrush AlignmentY="Top" AlignmentX="Left" Stretch="None" ViewportUnits="Absolute" Viewport="0,0,98,98" TileMode="Tile" ImageSource="/istockphoto-1210545210-612x612.jpg" >
+                </ImageBrush>
+            </Canvas.Background>
+        </Canvas>
+
+        <Canvas Name="paintSurface" MouseMove="paintSurface_MouseMove" Grid.Column="1" Grid.Row="1" MouseLeftButtonDown="paintSurface_MouseLeftButtonDown" MouseLeftButtonUp="paintSurface_MouseLeftButtonUp" >
+            <Canvas.Background>
+                <SolidColorBrush x:Name="surfaceOpacity" Color="White" Opacity="1"/>
+            </Canvas.Background>
+        </Canvas>
+
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="WhiteSmoke">
+            <ToolBarPanel DockPanel.Dock="Top">
+                <ToolBar Background="DodgerBlue" >
+                    <Button Background="LightSkyBlue" x:Name="about" Content="O aplikacji" Click="about_Click"></Button>
+                    <Button Background="LightSkyBlue" x:Name="drawbtn" Content="Rysuj dowolnie" Click="drawbtn_Click"></Button>
+                    <Button Background="LightSkyBlue" x:Name="rubberbtn" Content="Gumka" Click="rubberbtn_Click"></Button>
+                    <CheckBox x:Name="opacitycheck" Width="20" Height="20" Background="White" Checked="opacitycheck_Checked" Unchecked="opacitycheck_Unchecked" ></CheckBox>
+                    <Label FontWeight="Bold">Przezroczys.</Label>
+                </ToolBar>
+            </ToolBarPanel>
+
+            <ToolBarPanel DockPanel.Dock="Top" >
+                <ToolBar Background="DodgerBlue" >
+                    <Menu  Background="DodgerBlue" >
+                        <MenuItem Background="LightSkyBlue" Header="Odcinki">
+                            <MenuItem x:Name="drawsegment" Header="Rysuj odcinek" Click="drawsegment_Click" />
+                            <MenuItem x:Name="editsegment" Header="Edytuj odcinek" Click="editsegment_Click" />
+                        </MenuItem>
+                    </Menu>
+                    <Menu  Background="DodgerBlue" >
+                        <MenuItem Background="LightSkyBlue" Header="Kształty">
+                            <MenuItem Background="LightSkyBlue" x:Name="drawpointbtn" Header="Rysuj elipsę" Click="drawpointbtn_Click"/>
+                            <MenuItem x:Name="drawrect" Header="Rysuj kwadrat" Click="drawrect_Click"/>
+                            <MenuItem x:Name="drawpoly" Header="Rysuj sześciokąt" Click="drawpoly_Click"/>
+                        </MenuItem>
+                    </Menu>
+                    <CheckBox x:Name="fillshape" Width="20" Height="20" Background="White" Checked="fillshape_Checked" Unchecked="fillshape_Unchecked"></CheckBox>
+                    <Label FontWeight="Bold">Wypełnienie</Label>
+                </ToolBar>
+            </ToolBarPanel>
+
+            <ToolBarPanel DockPanel.Dock="Top">
+                <ToolBar Background="DodgerBlue" >
+                    <Button x:Name="black" Width="20" Height="20" Background="Black" Click="black_Click" BorderThickness="2"></Button>
+                    <Button x:Name="white" Width="20" Height="20" Background="White" Click="white_Click" BorderThickness="2"></Button>
+                    <Button x:Name="red" Width="20" Height="20" Background="Red" Click="red_Click" BorderThickness="2"></Button>
+                    <Button x:Name="green" Width="20" Height="20" Background="Green" Click="green_Click" BorderThickness="2"></Button>
+                    <Button x:Name="blue" Width="20" Height="20" Background="Blue" Click="blue_Click" BorderThickness="2"></Button>
+                    <Button x:Name="editcolor" Background="LightSkyBlue" Content="Niestandardowy" Click="editcolor_Click" ></Button>
+                    <TextBlock x:Name="colorprev" Width="20" Height="20"></TextBlock>
+                </ToolBar>
+            </ToolBarPanel>
+
+            <ToolBarPanel DockPanel.Dock="Top">
+                <ToolBar Background="DodgerBlue" >
+                    <Button Background="LightSkyBlue" x:Name="loadphoto" Content="Wczytaj obraz" Click="loadphoto_Click" ></Button>
+                    <Button IsEnabled="False" Background="LightSkyBlue" x:Name="orgphoto" Content="Przywróć orginalny" Click="orgphoto_Click"></Button>
+                </ToolBar>
+            </ToolBarPanel>
+
+            <ToolBarPanel DockPanel.Dock="Top">
+                <ToolBar Background="DodgerBlue" >
+                    <Button IsEnabled="False" Background="LightSkyBlue" x:Name="grayphoto" Content="Filtr czarno-biały" Click="grayphoto_Click"></Button>
+                    <Button IsEnabled="False" Background="LightSkyBlue" x:Name="sobelphoto" Content="Filtr sobel" Click="sobelphoto_Click"></Button>
+                </ToolBar>
+            </ToolBarPanel>
+
+            <ToolBarPanel DockPanel.Dock="Top">
+                <ToolBar Background="DodgerBlue" >
+                    <Button Margin="20" IsEnabled="False" Background="LightSkyBlue" x:Name="linearphoto" Content="Filtracja liniowa" Click="linearphoto_Click"></Button>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox x:Name="r0c0" Margin="1" Grid.Row="0" Grid.Column="0" Width="20" Height="20"></TextBox>
+                        <TextBox x:Name="r0c1" Margin="1" Grid.Row="0" Grid.Column="1" Width="20" Height="20"></TextBox>
+                        <TextBox x:Name="r0c2" Margin="1" Grid.Row="0" Grid.Column="2" Width="20" Height="20"></TextBox>
+
+                        <TextBox x:Name="r1c0" Margin="1" Grid.Row="1" Grid.Column="0" Width="20" Height="20"></TextBox>
+                        <TextBox x:Name="r1c1" Margin="1" Grid.Row="1" Grid.Column="1" Width="20" Height="20"></TextBox>
+                        <TextBox x:Name="r1c2" Margin="1" Grid.Row="1" Grid.Column="2" Width="20" Height="20"></TextBox>
+
+                        <TextBox x:Name="r2c0" Margin="1" Grid.Row="2" Grid.Column="0" Width="20" Height="20"></TextBox>
+                        <TextBox x:Name="r2c1" Margin="1" Grid.Row="2" Grid.Column="1" Width="20" Height="20"></TextBox>
+                        <TextBox x:Name="r2c2" Margin="1" Grid.Row="2" Grid.Column="2" Width="20" Height="20"></TextBox>
+                    </Grid>
+                </ToolBar>
+            </ToolBarPanel>
+
+            <ToolBarPanel DockPanel.Dock="Top">
+                <ToolBar Background="DodgerBlue" >
+                    <Button Background="LightSkyBlue" x:Name="savepngimg" Content="Zapisz do pliku" Click="savepngimg_Click"></Button>
+                </ToolBar>
+            </ToolBarPanel>
+        </DockPanel>
+        
+    </Grid>
+</Window>
